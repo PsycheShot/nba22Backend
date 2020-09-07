@@ -1,0 +1,27 @@
+2020-08-27 20:19:33,364  * Debugger is active! WARNING
+2020-08-27 20:19:33,364  * Debugger PIN: 247-362-222 INFO
+2020-08-27 20:19:33,618 127.02020-08-27 20:27:13,300  * Restarting with stat INFO
+2020-08-27 20:28:14,255  * Restarting with stat INFO
+2020-08-27 20:30:55,009  * Restarting with stat INFO
+] "GET /academicyears/khalid_bio@pace.edu.in HTTP/1.1" 200 - INFO
+2020-08-27 20:19:34,834 127.0.0.1 - - [27/Aug/2020 20:19:34] "GET /facultydetails/khalid_bio%40pace.edu.in/ HTTP/1.1" 200 - INFO
+2020-08-27 20:19:35,014 127.0.0.1 - - [27/Aug/2020 20:19:35] "GET /academicyears/khalid_bio@pace.edu.in HTTP/1.1" 200 - INFO
+2020-08-27 20:19:35,934 127.0.0.1 - - [27/Aug/2020 20:19:35] "GET /termtype/BE HTTP/1.1" 200 - INFO
+2020-08-27 20:19:38,341 127.0.0.1 - - [27/Aug/2020 20:19:38] "GET /termnumber/425/2017-18/FACULTY HTTP/1.1" 200 - INFO
+2020-08-27 20:19:42,209 127.0.0.1 - - [27/Aug/2020 20:19:42] "GET /nba21facultyDetail/2017-18/3,4/425 HTTP/1.1" 200 - INFO
+2020-08-27 20:19:45,219 127.0.0.1 - - [27/Aug/2020 20:19:45] "GET /termnumber/425/2018-19/FACULTY HTTP/1.1" 200 - INFO
+2020-08-27 20:19:48,805 127.0.0.1 - - [27/Aug/2020 20:19:48] "GET /nba21facultyDetail/2018-19/3,5/425 HTTP/1.1" 200 - INFO
+2020-08-27 20:19:55,784 127.0.0.1 - - [27/Aug/2020 20:19:55] "GET /nba21facultyDetail/2018-19/3,5,7/425 HTTP/1.1" 200 - INFO
+2020-08-27 20:22:39,549 127.0.0.1 - - [27/Aug/2020 20:22:39] "GET /facultydetails/khalid_bio%40pace.edu.in/ HTTP/1.1" 200 - INFO
+2020-08-27 20:22:39,762 127.0.0.1 - - [27/Aug/2020 20:22:39] "GET /academicyears/khalid_bio@pace.edu.in HTTP/1.1" 200 - INFO
+2020-08-27 20:22:40,554 127.0.0.1 - - [27/Aug/2020 20:22:40] "GET /termtype/BE HTTP/1.1" 200 - INFO
+2020-08-27 20:22:42,925 127.0.0.1 - - [27/Aug/2020 20:22:42] "GET /termnumber/425/2017-18/FACULTY HTTP/1.1" 200 - INFO
+2020-08-27 20:22:46,660 127.0.0.1 - - [27/Aug/2020 20:22:46] "GET /nba21facultyDetail/2017-18/3,4,5/425 HTTP/1.1" 200 - INFO
+2020-08-27 20:22:52,096 127.0.0.1 - - [27/Aug/2020 20:22:52] "GET /termnumber/425/2018-19/FACULTY HTTP/1.1" 200 - INFO
+2020-08-27 20:22:55,485 127.0.0.1 - - [27/Aug/2020 20:22:55] "GET /nba21facultyDetail/2018-19/3,5,7/425 HTTP/1.1" 200 - INFO
+2020-08-27 20:24:13,264 127.0.0.1 - - [27/Aug/2020 20:24:13] "GET /facultydetails/khalid_bio%40pace.edu.in/ HTTP/1.1" 200 - INFO
+2020-08-27 20:24:13,979 127.0.0.1 - - [27/Aug/2020 20:24:13] "GET /academicyears/khalid_bio@pace.edu.in HTTP/1.1" 200 - INFO
+2020-08-27 20:24:14,675 127.0.0.1 - - [27/Aug/2020 20:24:14] "GET /termtype/BE HTTP/1.1" 200 - INFO
+2020-08-27 20:24:16,530 127.0.0.1 - - [27/Aug/2020 20:24:16] "GET /termnumber/425/2017-18/FACULTY HTTP/1.1" 200 - INFO
+2020-08-27 20:24:22,016 127.0.0.1 - - [27/Aug/2020 20:24:22] "GET /nba21facultyDetail/2017-18/3,4,5,7/425 HTTP/1.1" 200 - INFO
+2020-08-27 20:27:12,720  * Detected change in '/home/spaneos/Indushree/FINAL/NBA-PACE/Backend/serviceapi.py', reloading INFO

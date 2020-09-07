@@ -1,0 +1,10 @@
+app:
+  tenants:
+    dhi_analytics:
+      dbName: dhi_analytics
+      user: analytics
+      password: pPM8FUJflenw
+      port: 47118
+      host: 88.99.143.82
+      appServerIp: 88.99.143.82
+  defaultTenant: dummy_db
