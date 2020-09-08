@@ -321,6 +321,26 @@ def get_average_co_attainment(facultyId,termList,year):
     # details=json.dumps(docs,default=json_util.default)
     return (docs)
 
+def web_combine(facultyId,termList,year,cCode):
+    temp=get_map_blooms_to_co(facultyId,termList,year,cCode)
+    df1=[ pd.DataFrame(temp[i]) for i in range(len(temp))]
+    if len(df1)==0:
+        return []
+    df2=pd.concat(df1)
+    if df2.empty:
+        return []
+    df2=df2.reset_index(drop=True)
+    df2.pop("index")
+    df=pd.DataFrame(get_individual_attainment_data(facultyId,termList,year,cCode))
+    df["bloomsLevel"]="EMPTY"
+    for i in range(len(df)):
+        for j in range(len(df2)):
+            if(df2.loc[j]['courseCode']==df.loc[i]['courseCode'] and df2.loc[j]['section']==df.loc[i]['section'] and df2.loc[j]['coNumber']==df.loc[i]['coNumber']):
+                df.at[i,"bloomsLevel"]=df2.loc[j]["BloomsLevel"]
+                continue
+    df3=df[df["bloomsLevel"]!="EMPTY"]
+    return json.loads(df3.to_json(orient='records'))
+
 # Functions for RWD version ################################################################################## 
 
 def rwd_map_blooms_to_co(facultyId,termList,year):

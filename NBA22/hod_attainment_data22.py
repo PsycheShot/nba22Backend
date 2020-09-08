@@ -599,3 +599,106 @@ def hod_combine_bloom(facList,year,termList,deptId):
     df3=df[df["bloomsLevel"]!="EMPTY"]
     return json.loads(df3.to_json(orient='records'))
 
+
+
+
+
+def hod_web_individual_attainment_details(facultyId,year,termList,deptId,cCode):
+    pipeline=[
+            {'$unwind':'$faculties'},
+            {'$unwind':'$departments'},
+            {'$match':
+                {
+                'faculties.facultyId':facultyId,
+                'academicYear':year,
+                'departments.termNumber':{'$in':termList},
+                'courseCode':cCode,
+                'departments.deptId':deptId
+                }
+            },
+            {
+            '$project':
+                {
+                    '_id':0,
+                    'courseCode':1,
+                    'courseName':1,
+                    'termNumber':'$departments.termNumber',
+                    'section':'$departments.section',
+                    'facultyId':'$faculties.facultyId',
+                    'year':'$academicYear',
+                    'deptId':'$departments.deptId'
+                } 
+            }
+            ]
+
+    mapping=db.dhi_lesson_plan.aggregate(pipeline)
+    docs=[doc for doc in mapping]
+    details=json.dumps(docs,default=json_util.default)
+    df=pd.DataFrame(docs)
+    attainment_data = [hod_get_required_attainment_detail(df.loc[i]) for i in range(len(df))]
+    attainment = list(itertools.chain.from_iterable(attainment_data))
+    df2 = pd.DataFrame(data=attainment, columns=['coNumber','coTitle','termNumber','section','courseCode',
+                                            'year','facultyId','totalAttainment','directAttainment','indirectAttainment','deptId'])
+    df2['totalAttainment'] = df2['totalAttainment'].round(decimals=2)
+    df2['directAttainment'] = df2['directAttainment'].round(decimals=2)
+    df2['indirectAttainment'] = df2['indirectAttainment'].round(decimals=2)
+    attainment_details = json.loads(df2.to_json(orient='records'))
+    attainment_details
+    return attainment_details
+
+def web_bloom_chart_HOD(facultyId,year,termList,deptId,cCode):
+    pipeline=[
+        {'$unwind':'$faculties'},
+        {'$unwind':'$departments'},
+        {'$match':
+            {
+            'faculties.facultyGivenId':facultyId,
+            'academicYear':year,
+            'departments.termNumber':{'$in':termList},
+             'departments.deptId':deptId,
+             'courseCode':cCode
+            }
+        },
+        {
+        '$project':
+            {
+                '_id':0,
+                'courseCode':1,
+                'courseName':1,
+                'termNumber':'$departments.termNumber',
+                'section':'$departments.section',
+                'facultyId':'$faculties.facultyId',
+                'year':'$academicYear',
+                'deptId':"$departments.deptId"
+            } 
+        }
+        ]
+    mapping=db.dhi_lesson_plan.aggregate(pipeline)
+    docs=[doc for doc in mapping]
+    df=pd.DataFrame(docs)
+    if df.empty:
+        return []
+    df1=df.sort_values(by=["courseCode","section","termNumber"])
+    blooms_level_mapping=[rwd_bloomslevel_with_co(df1.loc[i]) for i in range(len(df1))]
+    blooms_level_mapping
+    return blooms_level_mapping
+
+def web_combine_bloom_hod(facultyId,year,termList,deptId,cCode):
+    temp=web_bloom_chart_HOD(facultyId,year,termList,deptId,cCode)
+    df1=[ pd.DataFrame(temp[i]) for i in range(len(temp))]
+    if len(df1)==0:
+        return []
+    df2=pd.concat(df1)
+    if df2.empty:
+        return []
+    df2=df2.reset_index(drop=True)
+    df2.pop("index")
+    df=pd.DataFrame(hod_web_individual_attainment_details(facultyId,year,termList,deptId,cCode))
+    df["bloomsLevel"]="EMPTY"
+    for i in range(len(df)):
+        for j in range(len(df2)):
+            if(df2.loc[j]['courseCode']==df.loc[i]['courseCode'] and df2.loc[j]['section']==df.loc[i]['section'] and df2.loc[j]['coNumber']==df.loc[i]['coNumber']):
+                df.at[i,"bloomsLevel"]=df2.loc[j]["BloomsLevel"]
+                continue
+    df3=df[df["bloomsLevel"]!="EMPTY"]
+    return json.loads(df3.to_json(orient='records'))

@@ -165,12 +165,12 @@ def nba21_principal_details(academicYear, termNumber, department):
 @app.route("/nba22facultyDetail/bloommapping/<string:facultyId>/<string:year>/<termNumbers>/<string:cCode>") 
 def nba22_faculty_data(year,termNumbers,facultyId,cCode):
     termList=list(termNumbers.split(','))
-    return jsonify(faculty_attainment_data22.get_map_blooms_to_co(facultyId,termList,year,cCode))
+    return jsonify(faculty_attainment_data22.web_combine(facultyId,termList,year,cCode))
     
-@app.route("/nba22facultyDetail/<string:facultyId>/<string:year>/<termNumbers>/<string:cCode>")
-def nba22_faculty_attainment_data(year,termNumbers,facultyId,cCode):
+@app.route("/nba22hodDetail/bloommaping/<string:facultyId>/<string:year>/<termNumbers>/<string:deptId>/<string:cCode>")
+def nba22_hod_bloom_chart(year,termNumbers,facultyId,deptId,cCode):
     termList=list(termNumbers.split(','))
-    return jsonify(faculty_attainment_data22.get_individual_attainment_data(facultyId,termList,year,cCode))
+    return jsonify(hod_attainment_data22.web_combine_bloom_hod(facultyId,year,termList,deptId,cCode))
 
 @app.route("/nba22facultyDetail/codescription/<string:facultyId>/<string:year>/<termNumbers>/<string:cCode>")
 def nba22_faculty_co_description(year,termNumbers,facultyId,cCode):
